@@ -53,6 +53,7 @@ document.getElementById("header_img_over_right_btn").onclick = () => {restartInt
 		h.id += (h.id ? " " : "") + genTOCID(tocnum++);
 	}
 	for(doc of toc){
+		tocnum = 0;
 		for(h of h2s){
 			let node = document.createTextNode(h.innerHTML);
 			let div = document.createElement("div");
