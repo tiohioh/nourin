@@ -46,12 +46,18 @@ document.getElementById("header_img_over_right_btn").onclick = () => {restartInt
 	let toc = document.getElementsByClassName("toc");
 	let h2s = document.getElementsByTagName("h2");
 	try{
+	for(h of h2s){
+		h.id += h.id ? h.textContent : ` ${h.textContent}`;
+	}
 	for(doc of toc){
 		for(h of h2s){
 			let node = document.createTextNode(h.innerHTML);
 			let div = document.createElement("div");
 			div.append(node);
-			doc.append(div);
+			let link = document.createElement("a");
+			link.href = `#${h.textContent}`;
+			link.append(div);
+			doc.append(link);
 		}
 	}
 	}catch(e){alert(e)}
