@@ -47,7 +47,7 @@ document.getElementById("header_img_over_right_btn").onclick = () => {restartInt
 	let h2s = document.getElementsByTagName("h2");
 	try{
 	for(h of h2s){
-		h.id += h.id ? h.textContent : ` ${h.textContent}`;
+		h.id += h.id ? ` ${h.textContent}` : h.textContent;
 	}
 	for(doc of toc){
 		for(h of h2s){
