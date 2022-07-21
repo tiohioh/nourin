@@ -46,8 +46,11 @@ document.getElementById("header_img_over_right_btn").onclick = () => {restartInt
 	let toc = document.getElementsByClassName("toc");
 	let h2s = document.getElementsByTagName("h2");
 	try{
+	let tocnum;
+	tocnum = 0;
+	let genTOCID = (num) => `TocNum${num}`
 	for(h of h2s){
-		h.id += h.id ? ` ${h.textContent}` : h.textContent;
+		h.id += (h.id ? " " : "") + genTOCID(tocnum++);
 	}
 	for(doc of toc){
 		for(h of h2s){
@@ -55,7 +58,7 @@ document.getElementById("header_img_over_right_btn").onclick = () => {restartInt
 			let div = document.createElement("div");
 			div.append(node);
 			let link = document.createElement("a");
-			link.href = `#${h.textContent}`;
+			link.href = `#${genTOCID(tocnum++)}`;
 			link.append(div);
 			doc.append(link);
 		}
