@@ -2,8 +2,8 @@
 font-sizeは管理を楽にするためremで指定(root比指定)
 */
 	
+html {scroll-behavior: smooth;}
 body {
-scroll-behavior: smooth;
 	background-image: url(http://toorage.xyz/index.png);
 	background-size: 50%;
 	background-color: #FFF09F;
