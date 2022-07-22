@@ -3,10 +3,11 @@ font-sizeは管理を楽にするためremで指定(root比指定)
 */
 	
 body {
-	background-image : url(http://toorage.xyz/index.png);
-	background-size : 50%;
-	background-color : #FFF09F;
-	margin : 0;
+scroll-behavior: smooth;
+	background-image: url(http://toorage.xyz/index.png);
+	background-size: 50%;
+	background-color: #FFF09F;
+	margin: 0;
 }
 
 a{
@@ -23,7 +24,7 @@ a:focus{
 p{
 	margin: 0 0 10px 5px;
 	text-indent: 1em;
-	font-weight:bold;
+	font-weight: bold;
 	font-size: 1.0rem;
 }
 p:last-child{
