@@ -1,4 +1,4 @@
-const BASE_URL = "https://tiohioh.github.io";
+const BASE_URL = "https://tiohioh.github.io/src";
 let pageLoaded = false;
 
 const ERROR_CODE = {
