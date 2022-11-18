@@ -116,7 +116,7 @@ function loadPageContent(pageName){
 	xhr.onloadend = e => onStateChange("loadend",e,xhr);//loadend
 	xhr.ontimeout = e => onStateChange("timeout",e,xhr);//timeout
 	xhr.onerror = e => onStateChange("error",e,xhr);//nwet error
-	xhr.open("GET",`${BASE_URL}/html_content/${pageName}.json`);
+	xhr.open("GET",`${BASE_URL}/content/${pageName}.json`);
 	xhr.send();
 	
 	
