@@ -1,0 +1,135 @@
+const BASE_URL = "https://tiohioh.github.io";
+let pageLoaded = false;
+
+const ERROR_CODE = {
+	"0": "unknown. Check Your Network.",
+	"100": "Continue",
+	"101": "Switching Protocols",
+	"102": "Processing (WebDAV)",
+	"103": "Early Hints",
+	"200": "OK",
+	"201": "Created",
+	"202": "Accepted",
+	"203": "Non-Authoritative Information",
+	"204": "No Content",
+	"205": "Reset Content",
+	"206": "Partial Content",
+	"207": "Multi-Status (WebDAV)",
+	"208": "Already Reported (WebDAV)",
+	"226": "IM Used (HTTP Delta encoding)",
+	"400": "Bad Request",
+	"401": "Unauthorized",
+	"402": "Payment Required (Experimental)",
+	"403": "Forbidden",
+	"404": "Not Found",
+	"405": "Method Not Allowed",
+	"406": "Not Acceptable",
+	"407": "Proxy Authentication Required",
+	"408": "Request Timeout",
+	"409": "Conflict",
+	"410": "Gone",
+	"411": "Length Required",
+	"412": "Precondition Failed",
+	"413": "Payload Too Large",
+	"414": "URI Too Long",
+	"415": "Unsupported Media Type",
+	"416": "Range Not Satisfiable",
+	"417": "Expectation Failed",
+	"418": "I'm a teapot",
+	"421": "Misdirected Request",
+	"422": "Unprocessable Entity (WebDAV)",
+	"423": "Locked (WebDAV)",
+	"424": "Failed Dependency (WebDAV)",
+	"425": "Too Early (Experimental)",
+	"426": "Upgrade Required",
+	"428": "Precondition Required",
+	"429": "Too Many Requests",
+	"431": "Request Header Fields Too Large",
+	"451": "Unavailable For Legal Reasons",
+	"500": "Internal Server Error",
+	"501": "Not Implemented",
+	"502": "Bad Gateway",
+	"503": "Service Unavailable",
+	"504": "Gateway Timeout",
+	"505": "HTTP Version Not Supported",
+	"506": "Variant Also Negotiates",
+	"507": "Insufficient Storage (WebDAV)",
+	"508": "Loop Detected (WebDAV)",
+	"510": "Not Extended",
+	"511": "Network Authentication Required"
+}
+
+
+
+let DOM_ARTICLE;
+
+window.addEventListener('load', e => {
+	DOM_ARTICLE = document.getElementById("main-content");
+
+	let queries = location.search.match(/[^=?&]+=[^=?&]+/g)
+	queries ??= [];
+	const defaultValue = {
+		"p": "index"
+	}
+	let queryParams = {...defaultValue};
+	for(let queryParam of queries){
+		queryParam = queryParam.split("=");
+		queryParams[queryParam[0]] = queryParam[1];
+	}
+	
+	const pageHash = queryParams["p"] || queryParams["page"];
+	loadPageContent(pageHash);
+	
+});
+
+function loadPageContent(pageName){
+	const onStateChange = (status, e, xhr) => {
+		console.log(status, e, xhr)
+		if(status === "loadend")
+			if(xhr.readyState === 4 && xhr.status === 200)
+				pushDisplay(xhr.response);
+			else
+				pushDisplay(`<div class="http-error-response">Something Error Occurred(N/A)<br/>${xhr.status} ${ERROR_CODE[xhr.status]}</div>`)
+		else if(status === "timeout")
+			pushDisplay(`<div class="http-error-response">Something Error Occurred(TIMEOUT)<br/>${xhr.status} ${ERROR_CODE[xhr.status]}</div>`)
+		else if(status === "error")
+			pushDisplay(`<div class="http-error-response">Something Error Occurred(ERROR)<br/>${xhr.status} ${ERROR_CODE[xhr.status]}</div>`)
+		else
+			pushDisplay(`<div class="http-error-response">Something Error Occurred(UNKNOWN)<br/>${xhr.status} ${ERROR_CODE[xhr.status]}</div>`);
+		
+	}
+	
+	const pushDisplay = strings => {
+	
+		const isStr = strings.constructor.name === "String" ? true : false;
+		let contentObject = isStr ? {} : JSON.parse(strings)
+		contentObject["main-content"] ??= strings;
+		
+		document.getElementById("header-section").style.display = isStr ? "none" : "block";
+		
+		refleshDisplay(contentObject)
+	}
+
+	let xhr = new XMLHttpRequest()
+	//xhr.onreadystatechange = e => onStateChange("statechange",e,xhr);
+	//xhr.onloadstart = e => onStateChange("loadstart",e,xhr);
+	xhr.onloadend = e => onStateChange("loadend",e,xhr);//loadend
+	xhr.ontimeout = e => onStateChange("timeout",e,xhr);//timeout
+	xhr.onerror = e => onStateChange("error",e,xhr);//nwet error
+	xhr.open("GET",`${BASE_URL}/html_content/${pageName}.html`);
+	xhr.send();
+	
+	
+}
+
+function refleshDisplay(contentObject) {
+	const defaultContent = {
+		"main-content": "本サイトではサイト内のコンテンツの管理を簡略化するためにページ内のコンテンツ切り替えを実施しています。そのため、JavaScriptを無効化した場合本サイトの閲覧ができません。",
+		"content-title": "JavaScriptの使用について",
+		"post-date": "投稿日 : 2022-11-14",
+		"update-date": "更新日 : 2022-11-14",
+	};
+	//defaultContentとcontentObjectをマージする
+	
+	DOM_ARTICLE.innerHTML = contentObject["main-content"];
+}
