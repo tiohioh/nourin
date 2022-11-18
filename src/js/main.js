@@ -77,7 +77,7 @@ window.addEventListener('load', e => {
 		queryParams[queryParam[0]] = queryParam[1];
 	}
 	
-	const pageHash = queryParams["p"] || queryParams["page"];
+	const pageHash = queryParams["p"] || queryParams["page"] || "index";
 	loadPageContent(pageHash);
 	
 });
@@ -103,7 +103,7 @@ function loadPageContent(pageName){
 	
 		const isStr = strings.constructor.name === "String" ? true : false;
 		let contentObject = isStr ? {} : JSON.parse(strings)
-		contentObject["main-content"] ??= strings;
+		contentObject["content"] ??= strings;
 		
 		document.getElementById("header-section").style.display = isStr ? "none" : "block";
 		
@@ -116,7 +116,7 @@ function loadPageContent(pageName){
 	xhr.onloadend = e => onStateChange("loadend",e,xhr);//loadend
 	xhr.ontimeout = e => onStateChange("timeout",e,xhr);//timeout
 	xhr.onerror = e => onStateChange("error",e,xhr);//nwet error
-	xhr.open("GET",`${BASE_URL}/html_content/${pageName}.html`);
+	xhr.open("GET",`${BASE_URL}/html_content/${pageName}.json`);
 	xhr.send();
 	
 	
@@ -131,5 +131,5 @@ function refleshDisplay(contentObject) {
 	};
 	//defaultContentとcontentObjectをマージする
 	
-	DOM_ARTICLE.innerHTML = contentObject["main-content"];
+	DOM_ARTICLE.innerHTML = contentObject["content"];
 }
