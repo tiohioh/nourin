@@ -87,7 +87,7 @@ function loadPageContent(pageName){
 		console.log(status, e, xhr)
 		if(status === "loadend")
 			if(xhr.readyState === 4 && xhr.status === 200)
-				pushDisplay(xhr.response);
+				pushDisplay(xhr.response, false);
 			else
 				pushDisplay(`<div class="http-error-response">Something Error Occurred(N/A)<br/>${xhr.status} ${ERROR_CODE[xhr.status]}</div>`)
 		else if(status === "timeout")
@@ -99,9 +99,10 @@ function loadPageContent(pageName){
 		
 	}
 	
-	const pushDisplay = strings => {
+	const pushDisplay = (strings, isStr) => {
 	
-		const isStr = strings.constructor.name === "String" ? true : false;
+		//const isStr = strings.constructor.name === "String" ? true : false;
+		isStr ??= true;
 		let contentObject = isStr ? {} : JSON.parse(strings)
 		contentObject["content"] ??= strings;
 		
