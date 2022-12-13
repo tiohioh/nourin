@@ -88,7 +88,7 @@ var c;if("function"==typeof Object.setPrototypeOf)c=Object.setPrototypeOf;else{v
 l.prototype.m=function(a){this.i={A:a,B:!0};this.o=this.v||this.s};l.prototype["return"]=function(a){this.i={"return":a};this.o=this.s};function n(a){this.g=new l;this.C=a}n.prototype.l=function(a){m(this.g);if(this.g.h)return p(this,this.g.h.next,a,this.g.l);this.g.l(a);return r(this)};function t(a,b){m(a.g);var e=a.g.h;if(e)return p(a,"return"in e?e["return"]:function(q){return{value:q,done:!0}},b,a.g["return"]);a.g["return"](b);return r(a)}
 n.prototype.m=function(a){m(this.g);if(this.g.h)return p(this,this.g.h["throw"],a,this.g.l);this.g.m(a);return r(this)};function p(a,b,e,q){try{var g=b.call(a.g.h,e);if(!(g instanceof Object))throw new TypeError("Iterator result "+g+" is not an object");if(!g.done)return a.g.j=!1,g;var A=g.value}catch(B){return a.g.h=null,a.g.m(B),r(a)}a.g.h=null;q.call(a.g,A);return r(a)}
 function r(a){for(;a.g.o;)try{var b=a.C(a.g);if(b)return a.g.j=!1,{value:b.value,done:!1}}catch(e){a.g.u=void 0,a.g.m(e)}a.g.j=!1;if(a.g.i){b=a.g.i;a.g.i=null;if(b.B)throw b.A;return{value:b["return"],done:!0}}return{value:void 0,done:!0}}function u(a){this.next=function(b){return a.l(b)};this["throw"]=function(b){return a.m(b)};this["return"]=function(b){return t(a,b)};this[Symbol.iterator]=function(){return this}}
-function v(a){var b=w;a=new u(new n(a));k&&b.prototype&&k(a,b.prototype);return a}var x=document.createElement("div");x.style.fontSize="200%";document.currentScript.parentNode.insertBefore(x,document.currentScript);for(var y=0;7>y;y++){var z=document.createElement("span");z.innerText="\u25a0";x.append(z)}var C=x.childElementCount,D=6%C;
+function v(a){var b=w;a=new u(new n(a));k&&b.prototype&&k(a,b.prototype);return a}var x=document.createElement("div");x.style.fontSize="200%";x.style.textAlign="center";document.currentScript.parentNode.insertBefore(x,document.currentScript);for(var y=0;7>y;y++){var z=document.createElement("span");z.innerText="\u25a0";x.append(z)}var C=x.childElementCount,D=6%C;
 function w(){return v(function(a){x.children[D].innerText="\u25a0";x.children[D].style.fontWeight="normal";++D;D%=C;x.children[D].innerText="\u25a0";x.children[D].innerText="LOADING"[D];x.children[D].style.fontWeight="bold";a.o=1;return{value:null}})}setInterval(function(){return w().next()},500);
 				</script>
 			</div>
@@ -101,10 +101,10 @@ function w(){return v(function(a){x.children[D].innerText="\u25a0";x.children[D]
 				<div class="ul_in">
 					<ul>
 						<a href="?"><li>ホーム</li></a>
-						<li><a>記事</a></li>
-						<li><a>メンバー</a></li>
-						<li><a>お知らせ</a></li>
-						<li><a>情報</a></li>
+						<a href="?p=article"><li>記事</li></a>
+						<a href="?p=member"><li>メンバー</li></a>
+						<a href="?p=notice"><li>お知らせ</li></a>
+						<a href="?p=info><li>情報</li></a>
 					</ul>
 				</div>
 			</div>
