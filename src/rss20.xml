@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+    xmlns:rss="http://purl.org/rss/1.0/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>サンプルRSSです。</title>
+    <link>https://tiohioh.github.io/nourin/</link>
+    <description>農林同好会のHPです。</description>
+    <language>ja</language>
+    <atom:link rel="self" href="http://www.example.com/rss.xml" type="application/rss+xml" />
+    <pubDate>Tue, 26 May 2009 13:30:32 +0900</pubDate>
+    <lastBuildDate>Tue, 26 May 2009 13:30:32 +0900</lastBuildDate>
+    <image>
+      <title>TEST RSS</title>
+      <url>http://www.example.com/logo.gif</url>
+      <link>http://www.example.com/news/</link>
+    </image>
+    <item>
+      <title>ホーム</title>
+      <link>https://tiohioh.github.io/nourin/src/</link>
+      <description>農林同好会のHPです。</description>
+      <author>小屋の人</author>
+    </item>
+    <item>
+      <title>メンバー紹介</title>
+      <link>https://tiohioh.github.io/nourin/src/?p=member</link>
+      <description>メンバー紹介</description>
+    </item>
+  </channel>
+</rss>
